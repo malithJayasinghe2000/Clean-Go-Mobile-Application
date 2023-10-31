@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class Rating : AppCompatActivity() {
 
+    // Initialize Firebase Authentication
     private val auth = FirebaseAuth.getInstance()
     private val currentUserID: String? = auth.currentUser?.uid
 
@@ -24,35 +25,43 @@ class Rating : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rating)
 
+        // Initialize UI elements
         val messageEditText = findViewById<EditText>(R.id.feedback_message)
         val btnSubmit = findViewById<Button>(R.id.feedback_submit)
         val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
         val dp = findViewById<ImageView>(R.id.dp)
 
+        // Get data from the intent's extras
         val bundle = intent.extras
         val employeeID = bundle?.getString("empID")
         val bookingID = bundle?.getString("bookingID")
         val image = bundle?.getString("dp")
 
+        // Load the employee's image using Glide if available
         if (image != null) {
             Glide.with(this)
                 .load(image).circleCrop()
                 .into(dp)
         }
 
+        // Set a click listener for the submit button
         btnSubmit.setOnClickListener {
             val message = messageEditText.text.toString()
             val rating = ratingBar.rating.toDouble()
 
+            // Check for empty feedback message
             if (message.isEmpty()) {
                 messageEditText.error = "Feedback is required"
                 messageEditText.requestFocus()
             } else if (rating == 0.0) {
+                // Show a toast message if the rating is zero
                 Toast.makeText(this, "Please rate the service", Toast.LENGTH_SHORT).show()
             } else {
+                // Initialize the Firebase Realtime Database
                 val database = FirebaseDatabase.getInstance().reference
                 val feedbackRef = database.child("empRating").push()
 
+                // Create a JobRating object to store feedback data
                 val jobRating = JobRating(
                     id = feedbackRef.key.toString(),
                     jobID = bookingID.orEmpty(),
@@ -63,6 +72,7 @@ class Rating : AppCompatActivity() {
                     date = getCurrentDate()
                 )
 
+                // Push jobRating to the database
                 feedbackRef.setValue(jobRating)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Feedback submitted", Toast.LENGTH_SHORT).show()
@@ -77,6 +87,7 @@ class Rating : AppCompatActivity() {
         }
     }
 
+    // Function to get the current date
     private fun getCurrentDate(): String {
         val calendar = java.util.Calendar.getInstance()
         val day = calendar.get(java.util.Calendar.DAY_OF_MONTH)
@@ -86,6 +97,7 @@ class Rating : AppCompatActivity() {
         return "$day/$month/$year"
     }
 
+    // Function to update the employee's rating in the user database
     private fun updateRatingInUserDatabase(employeeID: String?, newRating: Double) {
         val userRef = FirebaseDatabase.getInstance().reference.child("users").child(employeeID.orEmpty())
         userRef.get().addOnSuccessListener { snapshot ->
@@ -97,9 +109,11 @@ class Rating : AppCompatActivity() {
             //Round to 2 decimal places
             val roundedRating = String.format("%.1f", updatedRating).toDouble()
 
+            // Update the employee's rating and rating count in the database
             userRef.child("rating").setValue(roundedRating)
             userRef.child("ratingCount").setValue(updatedTotalRatings)
         }.addOnFailureListener {
+            // Show an error toast message if rating update fails
             Toast.makeText(this, "Error updating rating: ${it.message}", Toast.LENGTH_SHORT).show()
         }
     }
