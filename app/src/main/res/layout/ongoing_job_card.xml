@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -18,36 +18,39 @@
             android:id="@+id/dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/job_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Job Title"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="25sp"
+                    android:ellipsize="end"
                     android:maxLength="20"
-                    android:ellipsize="end"/>
+                    android:text="Job Title"
+                    android:textSize="25sp" />
+
                 <TextView
                     android:id="@+id/job_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="20sp"
+                    android:ellipsize="end"
                     android:maxLength="20"
-                    android:ellipsize="end"/>
+                    android:text="Date"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/job_description"
@@ -61,6 +64,7 @@
                     android:textSize="20sp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,14 +72,14 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/finish_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Finish"
                     android:layout_gravity="center"
-                    android:id="@+id/finish_button"
-                    android:backgroundTint="#4CAF50"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#4CAF50"
+                    android:text="Finish" />
 
             </LinearLayout>
         </LinearLayout>
