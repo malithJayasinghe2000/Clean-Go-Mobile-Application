@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "906900778043",
+    "project_id": "cleango-fed2a",
+    "storage_bucket": "cleango-fed2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906900778043:android:7f0364a3c656c40fa9001e",
+        "android_client_info": {
+          "package_name": "com.example.cleango"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzzaPyy5oRwLX2eaCm8vPgZk_c-xy6OV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
