@@ -86,14 +86,7 @@ class HomeFragment : Fragment() {
         reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val dataList = mutableListOf<Employee>()
-
-//                userType = dataSnapshot.child(userID.toString()).child("userType").value.toString()
-//
-//                //Add to shared preferences
-//                val sharedPref = requireActivity().getSharedPreferences("sharedPref", 0)
-//                val editor = sharedPref.edit()
-//                editor.putString("userType", userType)
-//                editor.apply()
+                
 
                 for (snapshot in dataSnapshot.children) {
 
@@ -112,6 +105,7 @@ class HomeFragment : Fragment() {
                         dataList.add(employee!!)
                     }
                 }
+
                 //fix ranking order
                 dataList.sortByDescending { it.rating }
 
