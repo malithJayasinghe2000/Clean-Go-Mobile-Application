@@ -77,7 +77,7 @@ class BookingDetails : AppCompatActivity() {
         ratings = findViewById(R.id.ratings)
 
 
-
+        //job re accept or not
         if(accepted == "true" && completed == "false") {
             txtStatus.text = "Status: Accepted"
         } else if(accepted == "true" && completed == "true") {
