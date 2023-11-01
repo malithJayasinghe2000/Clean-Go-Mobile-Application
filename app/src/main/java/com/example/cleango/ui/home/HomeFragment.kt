@@ -112,8 +112,8 @@ class HomeFragment : Fragment() {
                         dataList.add(employee!!)
                     }
                 }
-
-                dataList.sortBy { it.rating }
+                //fix ranking order
+                dataList.sortByDescending { it.rating }
 
                 val cardAdapter = CardAdapter(dataList)
                 recyclerView.adapter = cardAdapter
