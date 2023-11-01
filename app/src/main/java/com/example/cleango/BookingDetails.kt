@@ -54,10 +54,12 @@ class BookingDetails : AppCompatActivity() {
         val info = bundle.getString("info")
         val view = bundle.getString("view")
 
+        //checking booking id is null?
         if (bookingID != null) {
             Log.d("Booking", bookingID)
         }
 
+        //find by xml ids
         dp_image = findViewById(R.id.image)
         title = findViewById(R.id.title)
         employeeName = findViewById(R.id.employee_name)
